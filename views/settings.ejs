@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/settings.css">
+    <title>Settings</title>
+</head>
+<body>
+    <div class="settings">
+        <div class="settingsWrapper">
+          <div class="settingsTitle">
+            <span class="settingsTitleUpdate">Update Your Account</span>
+            <span class="settingsTitleDelete">Delete Account</span>
+          </div>
+          <form class="settingsForm" action="/settings" method="POST">
+            <label>Current Username</label>
+            <input type="text" name="username" value="<%= userName %>" readonly/>
+            <label>Enter New Email</label>
+            <input type="email" placeholder="xyz@gmail.com" name="email" />
+            <input type="text" name="phone1" placeholder="contact 1">
+            <input type="text" name="phone2" placeholder="contact 2">
+            <input type="text" name="phone3" placeholder="contact 3">
+
+            <label>Password</label>
+            <input type="password" placeholder="Password" name="password" />
+            <button class="settingsSubmitButton" type="submit">
+              Update
+            </button>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

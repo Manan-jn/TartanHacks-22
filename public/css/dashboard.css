@@ -1,0 +1,18 @@
+
+body {
+    min-height: 100vh;
+    background-color: #e7e9f0;
+  }
+  
+  .drop-down{
+    opacity:0;
+    transform:translatey(-20px);
+    transition:all .2s;
+    pointer-events:none;
+  }
+  
+  .user .drop-down.show{
+    opacity:1;
+    transform:none;
+    pointer-events:all;
+  }

@@ -476,14 +476,10 @@
               //infoWindow.setContent(dis);
               //       infoWindow.open(map);
   
-  
             }
-  
             var routes = response.routes;
             for (var j = 0; j < routes.length; j++) {
               var points = routes[j].overview_path;
-  
-  
             }
           } else {
             window.alert('Directions request failed due to ' + status);
@@ -495,5 +491,7 @@
         navigator.geolocation.getCurrentPosition(initMap);
       });
     </script>
+    <script src="js/index.js"></script>
+    <script src="js/location.js"></script>
 </body>
 </html>

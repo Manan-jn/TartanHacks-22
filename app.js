@@ -4,6 +4,9 @@ const express = require('express');
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
+const accountSid = "ACc7a09c07721d70e03e75f3a2366c45b1";
+const authToken = "96de68bf1f5c1efe92977b34a25be5a4";
+const client = require('twilio')(accountSid, authToken);
 const socketio = require("socket.io");
 const session = require("express-session");
 const passport = require("passport");
@@ -88,9 +91,11 @@ io.on('connection', socket => {
         let phone2;
         let phone3;
         User.find({username: userName},function(err,foundUser){
-            phone1 = foundUser.contact1;
-            phone2 = foundUser.contact2;
-            phone3 = foundUser.contact3;
+            phone1 = foundUser[0].contact1;
+            phone2 = foundUser[0].contact2;
+            phone3 = foundUser[0].contact3;
+            console.log(foundUser);
+            console.log(phone1);
             client.messages
 					.create({
 						body: `I need immediate help at ${myLatitude}, ${myLongitude}`,
@@ -192,13 +197,16 @@ app.post("/register",function(req,res){
         }
     });
 })
+app.post("/text", (req, res) => {
+	res.redirect("/dashboard");
+})
 
 app.get("/dashboard", function (req, res) {
         if(req.isAuthenticated()){
 	        res.sendFile(__dirname + '/dashboard.html');
         }
         else{
-            res.render("/login");
+            res.redirect("/login");
         }
 });
 

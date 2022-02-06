@@ -141,21 +141,21 @@ io.on('connection', socket => {
             console.log(phone1);
             client.messages
 					.create({
-						body: `I need immediate help at ${myLatitude}, ${myLongitude}`,
+						body: `I need immediate help at ${myLatitude}, ${myLongitude}. Track my current location at https://stree22.herokuapp.com/maps`,
 						from: '+18593747178',
 						to: `${phone1}`
 					})
 					.then(message => console.log(message.sid));
 				client.messages
 					.create({
-						body: `I need immediate help at ${myLatitude}, ${myLongitude}`,
+						body: `I need immediate help at ${myLatitude}, ${myLongitude}. Track my current location at https://stree22.herokuapp.com/maps`,
 						from: '+18593747178',
 						to: `${phone2}`
 					})
 					.then(message => console.log(message.sid));
 				client.messages
 					.create({
-						body: `I need immediate help at ${myLatitude}, ${myLongitude}`,
+						body: `I need immediate help at ${myLatitude}, ${myLongitude}. Track my current location at https://stree22.herokuapp.com/maps`,
 						from: '+18593747178',
 						to: `${phone3}`
 					})

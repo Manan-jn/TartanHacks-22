@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema({
     contact1: String,
     contact2: String,
     contact3: String,
+    contact: String,
     password: String
 });
 
@@ -54,6 +55,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 let userName;
+let myNum;
 
 app.get("/",function(req,res){
     res.render("homePage");
@@ -80,8 +82,7 @@ app.get("/logout",function(req,res){
 });
 
 async function main() {
-
-	const conv = application.createConversation({ phone: "+919811605657", name: "Manan" });
+	const conv = application.createConversation({ phone: `${myNum}`, name: "Person" });
 
 	conv.audio.tts = "dasha";
 
@@ -115,11 +116,11 @@ async function main() {
 }
 let application;
 async function myFunc() {
-    application = await dasha.deploy("./app");
-    application.setExternal("console_log", (args, conv) => {
-    console.log(args);
-});
-await application.start();
+        application = await dasha.deploy("./app");
+        application.setExternal("console_log", (args, conv) => {
+        console.log(args);
+    });
+    await application.start();
 }
 myFunc();
 app.post("/fakeCall", function (req, res) {
@@ -204,7 +205,8 @@ app.post("/settings",function(req,res){
                email: req.body.email,
                contact1: req.body.phone1,
                contact2: req.body.phone2,
-               contact3: req.body.phone3
+               contact3: req.body.phone3,
+               contact: req.body.mynumber
            },req.body.password,function(err,user){
                if(err){
                    console.log(err);
@@ -212,6 +214,7 @@ app.post("/settings",function(req,res){
                else{
                    console.log(user);
                    req.logOut();
+                   myNum = user.contact;
                    res.redirect("/login");
                }
            });
@@ -233,6 +236,7 @@ app.post("/login",function(req,res){
         else{
             passport.authenticate("local")(req,res,function(){
                 userName = user.username;
+                myNum = user.contact;
                 res.redirect("/dashboard");
             });
         }
@@ -245,7 +249,8 @@ app.post("/register",function(req,res){
         email: req.body.email,
         contact1: req.body.phone1,
         contact2: req.body.phone2,
-        contact3: req.body.phone3
+        contact3: req.body.phone3,
+        contact: req.body.mynumber
     }, req.body.password,function(err, user){
         if(err){
             console.log(err);
@@ -254,6 +259,7 @@ app.post("/register",function(req,res){
         else{
             passport.authenticate("local")(req,res,function(){
                 userName = user.username;
+                myNum = user.contact;
                 res.redirect("/dashboard");
             });
         }

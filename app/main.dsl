@@ -22,7 +22,7 @@ start node root
     {
         #connectSafe($phone);
         #waitForSpeech(1000);
-        #sayText("Hello. My name is Dasha. Reply with cool or order a pizza if you feel unsafe!");
+        #sayText("Hello. My name is Dasha. Reply with okay or order a pizza if you feel unsafe!");
         wait *;
     }   
     transitions 
@@ -44,7 +44,18 @@ digression how_safe
 digression safe
 
 {
-    conditions {on #messageHasIntent("cool");} 
+    conditions {on #messageHasIntent("okay");} 
+    do
+    {
+        #sayText("This is from Delhi central police station. The police car is just arriving at your current location");
+        wait *;
+    }   
+    
+} 
+digression safe1
+
+{
+    conditions {on #messageHasIntent("order a pizza");} 
     do
     {
         #sayText("This is from Delhi central police station. The police car is just arriving at your current location");

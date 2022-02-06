@@ -164,24 +164,26 @@ io.on('connection', socket => {
 		console.log(myLongitude);
 	});
 });
+var lati;
+var longi;
 io.on('connection',socket=>{
     socket.on('liveLoc',(myLatitude, myLongitude)=>{
         //emit and event with lat and long
-        console.log("hello");
-        let lati = myLatitude;
-        let longi = myLongitude;
+        lati = myLatitude;
+        longi = myLongitude;
         console.log(lati);
         console.log(longi);
-        socket.emit("shareLoc",{"hello": "hello"});
-    })
-})
+    });
+    socket.emit("shareLoc",lati,longi);
+});
+
 app.post("/liveLocation",(req,res)=>{
     res.redirect("/dashboard");
-})
+});
 
 app.get("/maps",function(req,res){
     res.sendFile(__dirname + '/map.html');
-})
+});
 
 app.post("/settings",function(req,res){
     User.findOne({'username':req.body.username},function(err,data){
@@ -235,7 +237,7 @@ app.post("/login",function(req,res){
             });
         }
     });
-})
+});
 
 app.post("/register",function(req,res){
     User.register({

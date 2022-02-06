@@ -8,6 +8,8 @@ const accountSid = "ACc7a09c07721d70e03e75f3a2366c45b1";
 const authToken = "96de68bf1f5c1efe92977b34a25be5a4";
 const client = require('twilio')(accountSid, authToken);
 const socketio = require("socket.io");
+const dasha = require("@dasha.ai/sdk");
+const fs = require("fs");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -65,14 +67,6 @@ app.get("/register",function(req,res){
     res.render("loginSignup");
 });
 
-// app.get("/dashboard",function(req,res){
-//     if(req.isAuthenticated()){
-//         res.render("dashboard");
-//     }
-//     else{
-//         res.redirect("/login");
-//     }
-// });
 
 // ROUTE TO UPDATE PROFILE//////
 app.get("/settings",function(req,res){
@@ -84,6 +78,54 @@ app.get("/logout",function(req,res){
     req.logOut();
     res.redirect("/");
 });
+
+async function main() {
+
+	const conv = application.createConversation({ phone: "+919811605657", name: "Manan" });
+
+	conv.audio.tts = "dasha";
+
+	if (conv.input.phone === "chat") {
+		await dasha.chat.createConsoleChat(conv);
+	} else {
+		conv.on("transcription", console.log);
+	}
+
+	const logFile = await fs.promises.open("./log.txt", "w");
+	await logFile.appendFile("#".repeat(100) + "\n");
+
+	conv.on("transcription", async (entry) => {
+		await logFile.appendFile(`${entry.speaker}: ${entry.text}\n`);
+	});
+
+	conv.on("debugLog", async (event) => {
+		if (event?.msg?.msgId === "RecognizedSpeechMessage") {
+			const logEntry = event?.msg?.results[0]?.facts;
+			await logFile.appendFile(JSON.stringify(logEntry, undefined, 2) + "\n");
+		}
+	});
+
+	const result = await conv.execute({
+		// channel: conv.input.phone === "chat" ? "text" : "audio",
+	});
+
+	console.log(result.output);
+
+	await logFile.close();
+}
+let application;
+async function myFunc() {
+    application = await dasha.deploy("./app");
+    application.setExternal("console_log", (args, conv) => {
+    console.log(args);
+});
+await application.start();
+}
+myFunc();
+app.post("/fakeCall", function (req, res) {
+	main();
+	res.redirect("/dashboard");
+})
 
 io.on('connection', socket => {
 	socket.on('sendLoc', (myLatitude, myLongitude) => {
@@ -121,6 +163,24 @@ io.on('connection', socket => {
 		console.log(myLatitude);
 		console.log(myLongitude);
 	});
+});
+io.on('connection',socket=>{
+    socket.on('liveLoc',(myLatitude, myLongitude)=>{
+        //emit and event with lat and long
+        console.log("hello");
+        let lati = myLatitude;
+        let longi = myLongitude;
+        console.log(lati);
+        console.log(longi);
+        socket.emit("shareLoc",{"hello": "hello"});
+    })
+})
+app.post("/liveLocation",(req,res)=>{
+    res.redirect("/dashboard");
+})
+
+app.get("/maps",function(req,res){
+    res.sendFile(__dirname + '/map.html');
 })
 
 app.post("/settings",function(req,res){

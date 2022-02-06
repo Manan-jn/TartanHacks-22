@@ -1,4 +1,4 @@
 ####################################################################################################
 human: 
 human: how did not
-ai: Hello. My name is Dasha. Reply with cool or order a pizza if you feel unsafe!
+ai: Hello. My name is Dasha. Reply with okay or order a pizza if you feel unsafe!

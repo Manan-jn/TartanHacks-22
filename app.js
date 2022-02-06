@@ -8,7 +8,7 @@ const accountSid = "ACc7a09c07721d70e03e75f3a2366c45b1";
 const authToken = "96de68bf1f5c1efe92977b34a25be5a4";
 const client = require('twilio')(accountSid, authToken);
 const socketio = require("socket.io");
-const dasha = require("@dasha.ai/sdk");
+// const dasha = require("@dasha.ai/sdk");
 const fs = require("fs");
 const session = require("express-session");
 const passport = require("passport");
@@ -81,52 +81,52 @@ app.get("/logout",function(req,res){
     res.redirect("/");
 });
 
-async function main() {
-	const conv = application.createConversation({ phone: `${myNum}`, name: "Person" });
+// async function main() {
+// 	const conv = application.createConversation({ phone: `${myNum}`, name: "Person" });
 
-	conv.audio.tts = "dasha";
+// 	conv.audio.tts = "dasha";
 
-	if (conv.input.phone === "chat") {
-		await dasha.chat.createConsoleChat(conv);
-	} else {
-		conv.on("transcription", console.log);
-	}
+// 	if (conv.input.phone === "chat") {
+// 		await dasha.chat.createConsoleChat(conv);
+// 	} else {
+// 		conv.on("transcription", console.log);
+// 	}
 
-	const logFile = await fs.promises.open("./log.txt", "w");
-	await logFile.appendFile("#".repeat(100) + "\n");
+// 	const logFile = await fs.promises.open("./log.txt", "w");
+// 	await logFile.appendFile("#".repeat(100) + "\n");
 
-	conv.on("transcription", async (entry) => {
-		await logFile.appendFile(`${entry.speaker}: ${entry.text}\n`);
-	});
+// 	conv.on("transcription", async (entry) => {
+// 		await logFile.appendFile(`${entry.speaker}: ${entry.text}\n`);
+// 	});
 
-	conv.on("debugLog", async (event) => {
-		if (event?.msg?.msgId === "RecognizedSpeechMessage") {
-			const logEntry = event?.msg?.results[0]?.facts;
-			await logFile.appendFile(JSON.stringify(logEntry, undefined, 2) + "\n");
-		}
-	});
+// 	conv.on("debugLog", async (event) => {
+// 		if (event?.msg?.msgId === "RecognizedSpeechMessage") {
+// 			const logEntry = event?.msg?.results[0]?.facts;
+// 			await logFile.appendFile(JSON.stringify(logEntry, undefined, 2) + "\n");
+// 		}
+// 	});
 
-	const result = await conv.execute({
-		// channel: conv.input.phone === "chat" ? "text" : "audio",
-	});
+// 	const result = await conv.execute({
+// 		// channel: conv.input.phone === "chat" ? "text" : "audio",
+// 	});
 
-	console.log(result.output);
+// 	console.log(result.output);
 
-	await logFile.close();
-}
-let application;
-async function myFunc() {
-        application = await dasha.deploy("./app");
-        application.setExternal("console_log", (args, conv) => {
-        console.log(args);
-    });
-    await application.start();
-}
-myFunc();
-app.post("/fakeCall", function (req, res) {
-	main();
-	res.redirect("/dashboard");
-})
+// 	await logFile.close();
+// }
+// let application;
+// async function myFunc() {
+//         application = await dasha.deploy("./app");
+//         application.setExternal("console_log", (args, conv) => {
+//         console.log(args);
+//     });
+//     await application.start();
+// }
+// myFunc();
+// app.post("/fakeCall", function (req, res) {
+// 	main();
+// 	res.redirect("/dashboard");
+// })
 
 io.on('connection', socket => {
 	socket.on('sendLoc', (myLatitude, myLongitude) => {

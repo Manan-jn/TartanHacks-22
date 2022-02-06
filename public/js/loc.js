@@ -10,14 +10,14 @@ latitudes.push(temp1);
 longitudes.push(temp2);
 
 socket.on('shareLoc',(lati,longi)=>{
-  console.log(lati);
-  console.log(longi);
-  console.log(typeof(lati));
-  console.log(typeof(longi));
+  // console.log(lati);
+  // console.log(longi);
+  // console.log(typeof(lati));
+  // console.log(typeof(longi));
   temp1 = parseFloat(lati);
   temp2 = parseFloat(longi);
-  console.log(temp1);
-  console.log(typeof(temp1));
+  // console.log(temp1);
+  // console.log(typeof(temp1));
 
 
   latitudes.push(temp2);

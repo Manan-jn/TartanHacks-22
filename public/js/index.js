@@ -11,10 +11,6 @@ btn.addEventListener("click", function () {
 
 const liveL = document.querySelector('#liveLoc');
 
-let flag =0;
-
 liveL.addEventListener("click",function(){
-    while(flag===0){
         socket.emit('liveLoc',myLongitude.innerHTML, myLatitude.innerHTML);
-    }
 })

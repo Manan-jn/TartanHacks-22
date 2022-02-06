@@ -8,3 +8,8 @@ btn.addEventListener("click", function () {
     // console.log(myLatitude.innerHTML);
 })
 // socket.emit('send', message);
+
+const liveL = document.querySelector('#liveLoc');
+liveL.addEventListener("click",function(){
+    socket.emit('liveLoc',myLongitude.innerHTML, myLatitude.innerHTML);
+})

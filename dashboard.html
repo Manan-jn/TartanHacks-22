@@ -91,10 +91,10 @@
 
           </li>
           <li class="font-medium text-sm p-3 hover:bg-slate-300 sm:p-0 sm:hover:bg-transparent text-primary">
-            <a href="#">Home</a>
+            <a href="/dashboard">Home</a>
           </li>
           <li class="font-medium text-sm p-3 cursor-pointer hover:bg-slate-300 sm:p-0 sm:hover:bg-transparent text-gray-600 hover:text-primary transition-colors">
-            <a href="#">About</a>
+            <a href="/">Features</a>
           </li>
         </ul>
     
@@ -152,15 +152,24 @@
             </a>
           </button>
         </form>
-        <!-- <a class="mr-5 hover:text-gray-900"></a>
-        <a class="mr-5 hover:text-gray-900"></a>
-        <a class="mr-5 hover:text-gray-900">
-          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-          <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_veeohwtn.json" background="transparent"
-            speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
-          </p>
-        </a>
-        <a class="mr-5 hover:text-white-900">
+        <!-- <a class="mr-5 hover:text-gray-900"></a> -->
+        <!-- <a class="mr-5 hover:text-gray-900"></a> -->
+        <form action="/fakeCall" method="POST">
+            <button type="submit">
+                <a class="mr-5 hover:text-gray-900">
+                    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                    <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_veeohwtn.json" background="transparent"
+                        speed="1" style="width: 100px; height: 100px;" loop autoplay></lottie-player>
+                    </p>
+                </a>
+            </button>
+        </form>
+        <form action="/liveLocation" method="POST">
+            <button type="submit" id="liveLoc">
+                Live Location
+            </button>
+        </form>
+        <!-- <a class="mr-5 hover:text-white-900">
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player src="https://assets6.lottiefiles.com/packages/lf20_uwos7l6e.json" background="transparent"
             speed="0.5" style="width: 50px; height: 50px;" loop autoplay></lottie-player>Send your location to trusted

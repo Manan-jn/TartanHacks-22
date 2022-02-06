@@ -1,0 +1,49 @@
+####################################################################################################
+ai: Hello. My name is Dasha. Reply with cool or order a pizza if you feel unsafe!
+[
+  {
+    "type": "Intent",
+    "skill": "sentiment",
+    "weight": -1,
+    "likelihood": -1,
+    "location": {
+      "start": 0,
+      "end": 0
+    },
+    "intent": null,
+    "state": "neutral",
+    "sentenceType": "statement"
+  }
+]
+human: feed
+ai: Sorry, the connection dropped for a second. Could you say that again?
+[
+  {
+    "type": "Intent",
+    "skill": "sentiment",
+    "weight": -1,
+    "likelihood": -1,
+    "location": {
+      "start": 0,
+      "end": 2
+    },
+    "intent": null,
+    "state": "neutral",
+    "sentenceType": "statement"
+  },
+  {
+    "type": "Intent",
+    "skill": "9d8444d529e681186b4a3dfa7eee67f3:v2",
+    "weight": 0.98958,
+    "likelihood": 1,
+    "location": {
+      "start": -1,
+      "end": -1
+    },
+    "intent": "cool",
+    "state": "positive",
+    "sentenceType": "statement"
+  }
+]
+human: order a pizza
+ai: This is from Delhi central police station. The police car is just arriving at your current location

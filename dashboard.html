@@ -177,7 +177,7 @@
             
           </button>
       </form>
-      <form action="/liveLocation" method="POST">
+      <form action="/stopliveLocation" method="POST">
         <button type="submit" id="liveLoc">
           <a class="mr-5 hover:text-gray-900">
             <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -498,6 +498,7 @@
               infoWindow.setPosition(posInit);
               var message = 'How dangerous it is on a scale of 1 to 5? :' + dindex[k];
               document.getElementById(safetyi).innerHTML = message;
+              document.getElementById(safetyi).style.fontWeight="980";
               var dis = 'Route :' + k;
   
               //infoWindow.setContent(dis);

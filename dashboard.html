@@ -210,7 +210,7 @@
     <div class="ui container">
     </div>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYix08CvzofgSO_7bJr3yr8VLqaEipyhI&libraries=places"></script>
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSIoIsfuKto5ujYFLsA5JvLTbEttKoEOk&libraries=places"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <script>
@@ -237,17 +237,17 @@
   
         // directionsDisplay.setMap(map);
         directionsDisplay.setMap(map);
-        var script = document.createElement('script');
-        //script.src = 'helper.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
+        // var script = document.createElement('script');
+        // //script.src = 'helper.js';
+        // document.getElementsByTagName('head')[0].appendChild(script);
   
-        map.data.setStyle(function (feature) {
-          var magnitude = feature.getProperty('mag');
-          console.log(typeof (magnitude));
-          return {
-            icon: getCircle(magnitude)
-          };
-        });
+        // map.data.setStyle(function (feature) {
+        //   var magnitude = feature.getProperty('mag');
+        //   console.log(typeof (magnitude));
+        //   return {
+        //     icon: getCircle(magnitude)
+        //   };
+        // });
         new AutocompleteDirectionsHandler(map);
       }
       function getCircle(magnitude) {
@@ -378,6 +378,8 @@
             //me.directionsDisplay.setDirections(response);
             console.log(response.routes.length);
             var dindex = [];
+            console.log("Hello");
+            console.log(response.routes);
             for (var k = 0, len = response.routes.length; k < len; k++) {
               dindex[k] = 0;
               var points = response.routes[k].overview_path;
